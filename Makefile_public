@@ -1,0 +1,13 @@
+ROOMSERVER_INCLUDE_DIR = $(ROOMSERVER_DIR)
+
+BLL_DIR = bll
+REQ_SONG_DIR = requestsong
+CTL_DIR = ctl
+DAL_DIR = dal
+DEF_DIR = def
+CONFIG_DIR = config
+
+ROOMSERVER_OBJ_DIR = $(ROOMSERVER_DIR)/.objs
+
+ROOMSERVER_LDFLAGS = $(LDFLAGS) -ldl -lpthread
+

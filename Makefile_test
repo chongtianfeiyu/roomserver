@@ -1,0 +1,61 @@
+include ../Makefile_public_test
+include ./Makefile_public_test
+
+TARGET	= $(DEBUG_TARGET)
+
+DEBUG_TARGET = $(BIN_DIR)/unittest_roomserver$(BIN_SUFFIX)
+
+ROOMSERVER_SRC = $(wildcard *.cpp)
+DAL_SRC = $(wildcard $(DAL_DIR)/*.cpp)
+DEF_SRC = $(wildcard $(DEF_DIR)/*.cpp)
+CTL_SRC = $(wildcard $(CTL_DIR)/*.cpp)
+BLL_SRC = $(wildcard $(BLL_DIR)/*.cpp)
+
+CONFIG_SRC = $(wildcard $(CONFIG_DIR)/*.cpp)
+UNITTEST_SRC = $(wildcard $(UNITTEST_DIR)/*.cpp)
+
+ROOMSERVER_OBJS = $(addprefix $(ROOMSERVER_OBJ_DIR)/, $(subst .cpp,.o,$(ROOMSERVER_SRC)))
+
+OBJS = $(wildcard $(ROOMSERVER_OBJ_DIR)/*.o)
+
+INC = -I$(FRAME_INCLUDE_DIR) -I$(ROOMSERVER_INCLUDE_DIR) -I$(MYSQL_INCLUDE_DIR) -I$(PUBLIC_INCLUDE_DIR)
+
+all : $(TARGET)
+
+$(TARGET) : $(ROOMSERVER_OBJS) COMMON FRAME DAL DEF CTL BLL CONFIG UNITTEST
+	$(CXX)  -o $@ $(OBJS) $(ROOMSERVER_LDFLAGS)
+$(ROOMSERVER_OBJ_DIR)/%.o : %.cpp
+	$(CXX) $(CPPFLAGS) -c $< -o $@
+COMMON:
+	cd $(COMMON_DIR); make
+DAL:
+	cd $(DAL_DIR); make
+DEF:
+	cd $(DEF_DIR); make
+CTL:
+	cd $(CTL_DIR); make
+BLL:
+	cd $(BLL_DIR); make
+
+CONFIG:
+	cd $(CONFIG_DIR); make
+
+FRAME:
+	cd $(FRAME_DIR); make
+	
+UNITTEST:
+	cd ${UNITTEST_DIR}; make
+
+
+clean: 
+	cd $(COMMON_DIR); make clean;
+	cd $(FRAME_DIR); make clean;
+	cd $(CONFIG_DIR); make clean;
+	cd $(DAL_DIR); make clean;
+	cd $(DEF_DIR); make clean;
+	cd $(CTL_DIR); make clean;
+	cd $(BLL_DIR); make clean;
+	cd  ${UNITTEST_DIR}; make clean;
+	rm -f $(OBJS) $(TARGET)
+
+

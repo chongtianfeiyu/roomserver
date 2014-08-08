@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <timers>
+    	<playerstatimer  every="600"/>
+    	<onlinetimestatimer  every="3600" runtime="1"/>
+    </timers>
+	<vips>
+		<vip  level="0x00" watchcount="0" enterroomcount="1" invitevipcount="0"/>
+		<vip  level="0x01" watchcount="0" enterroomcount="1" invitevipcount="0"/>
+		<vip  level="0x02" watchcount="0" enterroomcount="1" invitevipcount="0"/>
+		<vip  level="0x04" watchcount="1" enterroomcount="1" invitevipcount="0"/>
+		<vip  level="0x08" watchcount="2" enterroomcount="1" invitevipcount="1"/>
+		<vip  level="0x10" watchcount="3" enterroomcount="1" invitevipcount="3"/>
+		<vip  level="0x20" watchcount="5" enterroomcount="1" invitevipcount="5"/>
+		<vip  level="0x40" watchcount="5" enterroomcount="2" invitevipcount="10"/>
+		<vip  level="0x60" watchcount="8" enterroomcount="5" invitevipcount="10"/>
+		<vip  level="0x80" watchcount="15" enterroomcount="10" invitevipcount="15"/>
+	</vips>
+	<roomtypes>
+	    <roomtype playercount="50"  waitcount="30"/>
+		<roomtype playercount="150"  waitcount="30"/>
+		<roomtype playercount="300"  waitcount="30"/>
+		<roomtype playercount="500"  waitcount="30"/>
+		<roomtype playercount="1000"  waitcount="30"/>
+	</roomtypes>
+	<playerbegin value="1"/>
+	<roombegin value="1"/>
+	<shutuptime value="600"/>
+	<requestsong cost="15000"/>
+	<ticket requestervalue="10" chance="3">
+        <param playercount="0" ticketcount="0"/>
+        <param playercount="1" ticketcount="1"/>
+        <param playercount="2" ticketcount="1"/>
+        <param playercount="3" ticketcount="2"/>
+        <param playercount="4" ticketcount="2"/>
+        <param playercount="22" ticketcount="4"/>
+        <param playercount="27" ticketcount="5"/>
+        <param playercount="32" ticketcount="6"/>
+        <param playercount="37" ticketcount="7"/>
+        <param playercount="42" ticketcount="8"/>
+        <param playercount="47" ticketcount="9"/>
+        <param playercount="52" ticketcount="10"/>
+        <param playercount="57" ticketcount="11"/>
+        <param playercount="62" ticketcount="12"/>
+        <param playercount="67" ticketcount="13"/>
+        <param playercount="72" ticketcount="14"/>
+        <param playercount="77" ticketcount="15"/>
+        <param playercount="92" ticketcount="16"/>
+        <param playercount="97" ticketcount="17"/>
+        <param playercount="102" ticketcount="18"/>
+        <param playercount="107" ticketcount="19"/>
+        <param playercount="112" ticketcount="20"/>
+        <param playercount="117" ticketcount="21"/>
+        <param playercount="122" ticketcount="22"/>
+        <param playercount="127" ticketcount="23"/>
+        <param playercount="132" ticketcount="24"/>
+        <param playercount="137" ticketcount="25"/>
+        <param playercount="142" ticketcount="26"/>
+        <param playercount="147" ticketcount="27"/>
+        <param playercount="152" ticketcount="28"/>
+        <param playercount="157" ticketcount="29"/>
+        <param playercount="162" ticketcount="30"/>
+        <param playercount="167" ticketcount="31"/>
+        <param playercount="172" ticketcount="32"/>
+        <param playercount="177" ticketcount="33"/>
+        <param playercount="182" ticketcount="34"/>
+        <param playercount="187" ticketcount="35"/>
+        <param playercount="192" ticketcount="36"/>
+        <param playercount="197" ticketcount="37"/>
+        <param playercount="202" ticketcount="38"/>
+        <param playercount="207" ticketcount="39"/>
+        <param playercount="212" ticketcount="40"/>
+        <param playercount="217" ticketcount="41"/>
+        <param playercount="222" ticketcount="42"/>
+        <param playercount="227" ticketcount="43"/>
+        <param playercount="232" ticketcount="44"/>
+        <param playercount="237" ticketcount="45"/>
+        <param playercount="242" ticketcount="46"/>
+        <param playercount="247" ticketcount="47"/>
+        <param playercount="252" ticketcount="48"/>
+        <param playercount="257" ticketcount="49"/>
+        <param playercount="262" ticketcount="50"/>
+    </ticket>
+    <vote can_enter_new_after_showresulttime="5">
+        <param section="fightforticket" time="15"/>
+        <param section="enjoy" time="5"/>
+        <param section="vote" time="45"/>
+        <param section="showresult" time="120"/>
+    </vote>
+    <text>
+        <private viplevel="0x01" rolerank="0x01" identitytype="0x00" closepoorman="0"/>
+        <public viplevel="0x01"/>
+    </text>
+</config>
