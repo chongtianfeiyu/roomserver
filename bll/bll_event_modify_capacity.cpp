@@ -125,7 +125,7 @@ int32_t CModifyCapacityMessageEvent::KickPlayerForModifyCapacity(CRoom *pRoom,in
     		return S_OK;
     	}
        //提出非皇冠，和非管理的人
-    	if(arrPlayer[i]->GetVipLevel() >= enmVipLevel_TIP)
+    	if(arrPlayer[i]->GetVipLevel() >= enmVipLevel_King)
     	{
     		arrSecondPlayer[nSecondKickCount++] = arrPlayer[i];
     		break;

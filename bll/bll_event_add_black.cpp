@@ -290,7 +290,7 @@ int32_t CAddBlockEvent::AddPlayerToBlack(CRoom *pRoom,RoleID nAddBlockRoleID)
 		return E_RS_NOPERMISSIONS;
 	}
 	//银色皇冠以上用户不让拉黑
-	if(pPlayer->GetVipLevel()>=enmVipLevel_Silver_KING)
+	if(pPlayer->GetVipLevel()>=enmVipLevel_Baron)
 	{
 		WRITE_ERROR_LOG("add player to black filed because no permissions to king!{nAddBlockRoleID=%d, nVipLevel=0x%02X}",nAddBlockRoleID,pPlayer->GetVipLevel());
 		return E_RS_NOPERMISSIONS_KING;

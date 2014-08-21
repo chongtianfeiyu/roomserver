@@ -220,7 +220,7 @@ int32_t CP2PReqEvent::CheckVipLevel(VipLevel nReqVipLevel,PlayerSelfSetting nDes
 {
 	int32_t ret = S_OK;
 	//请求者的vip等级低于vip
-	if(enmVipLevel_RED > nReqVipLevel)
+	if(enmVipLevel_Gold > nReqVipLevel)
 	{
 		nConnectP2PResult = enmConnectP2PResult_SELF_NOT_VIP;
 		return ret;
@@ -230,7 +230,7 @@ int32_t CP2PReqEvent::CheckVipLevel(VipLevel nReqVipLevel,PlayerSelfSetting nDes
 	{
 		case enmSelfSeting_P2PShow_Vip:
 		{
-            if(enmVipLevel_RED > nReqVipLevel)
+            if(enmVipLevel_Gold > nReqVipLevel)
             {
             	nConnectP2PResult = enmConnectP2PResult_OTHER_Need_Vip;
             }
@@ -238,7 +238,7 @@ int32_t CP2PReqEvent::CheckVipLevel(VipLevel nReqVipLevel,PlayerSelfSetting nDes
 		break;
 		case enmSelfSeting_P2PShow_King:
 		{
-			if(enmVipLevel_Silver_KING > nReqVipLevel)
+			if(enmVipLevel_Baron > nReqVipLevel)
 			{
 				nConnectP2PResult = enmConnectP2PResult_OTHER_Need_King;
 			}

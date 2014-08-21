@@ -118,13 +118,13 @@ public:
 		}
 		if(nRandom < PURPLE_PERCENT * nRange)
 		{
-			return enmVipLevel_PURPLE;
+			return enmVipLevel_Diamond;
 		}
 		else if(nRandom < (PURPLE_RED + PURPLE_PERCENT) * nRange)
 		{
-			return enmVipLevel_RED;
+			return enmVipLevel_Gold;
 		}
-		return enmVipLevel_REGISTER;
+		return enmVipLevel_Regist;
     }
 
     int32_t GetColorType()
@@ -181,7 +181,7 @@ public:
 		{
 			nRandom = -nRandom;
 		}
-    	if(nVipLevel == enmVipLevel_REGISTER)
+    	if(nVipLevel == enmVipLevel_Regist)
     	{
     		if(nRandom < 7000)
     		{
@@ -196,7 +196,7 @@ public:
 				return enmMagnateLevel_2;
 			}
     	}
-    	if(nVipLevel == enmVipLevel_RED)
+    	if(nVipLevel == enmVipLevel_Gold)
 		{
 			if(nRandom < 8000)
 			{
@@ -211,7 +211,7 @@ public:
 				return enmMagnateLevel_3;
 			}
 		}
-		if(nVipLevel == enmVipLevel_PURPLE)
+		if(nVipLevel == enmVipLevel_Diamond)
 		{
 			if(nRandom < 5500)
 			{

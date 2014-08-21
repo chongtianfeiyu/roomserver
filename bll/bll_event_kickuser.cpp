@@ -82,7 +82,7 @@ int32_t CKickUserEvent::OnEventKickUser(MessageHeadSS *pMsgHead, IMsgBody* pMsgB
 
 	RoleRank nSrcRoleRank = pRoom->GetRoleRank(pMsgHead->nRoleID);
 	//判断是否有踢人的权利
-	if(nSrcRoleRank<enmRoleRank_Admin&&pPlayer->GetVipLevel()<enmVipLevel_Silver_KING)
+	if(nSrcRoleRank<enmRoleRank_Admin&&pPlayer->GetVipLevel()<enmVipLevel_Baron)
 	{
 		WRITE_ERROR_LOG("kick player filed because no permissions{nSrcRoleID=%d, nSrcRoleRank=0x%04x, nVipLevel=0x%04x}",pCKickUserReq->nKickRoleID,nSrcRoleRank,pPlayer->GetVipLevel());
 		SendResponseToClient(pMsgHead,enmKickResult_NO_Permission,nOptionLen,pOptionData);
@@ -101,11 +101,7 @@ int32_t CKickUserEvent::OnEventKickUser(MessageHeadSS *pMsgHead, IMsgBody* pMsgB
 		}
 		//发送成功回应
 		SendResponseToClient(pMsgHead,enmKickResult_OK,nOptionLen,pOptionData);
-		int32_t nNeedRobotCount = pRoom->GetNeedRobotCount();
-		if(nNeedRobotCount<0)
-		{
-			KickRobot(pRoom,-nNeedRobotCount);
-		}
+		KickRobot(pRoom, pRoom->GetNeedRobotCount());
 		return ret;
 	}
 	CPlayer *pDestPlayer = NULL;
@@ -249,11 +245,11 @@ int32_t CKickUserEvent::KickUser(CRoom *pRoom,RoleRank nSrcRoleRank,VipLevel nSr
 			return E_RS_NOPERMISSIONS;
 		}
 		//有冠
-		if(nDestVipLevel >= enmVipLevel_Silver_KING)
+		if(nDestVipLevel >= enmVipLevel_Baron)
 		{
 			//todo 判断VIP 皇冠等级（银、金冠、水晶只有室主可踢，其他冠不可以踢）
-			if((pPlayer->GetVipLevel() >= enmVipLevel_DIAMOND && nSrcRoleRank < enmRoleRank_Super)
-					|| (pPlayer->GetVipLevel() <= enmVipLevel_SUPER && pPlayer->GetVipLevel() >= enmVipLevel_Silver_KING && nSrcRoleRank < enmRoleRank_Host))
+			if((pPlayer->GetVipLevel() >= enmVipLevel_Marquis && nSrcRoleRank < enmRoleRank_Super)
+					|| (pPlayer->GetVipLevel() <= enmVipLevel_Earl && pPlayer->GetVipLevel() >= enmVipLevel_Baron && nSrcRoleRank < enmRoleRank_Host))
 			{
 				WRITE_ERROR_LOG("kick player filed because no permissions{nKickRoleID=%d, nSrcRoleRank=%d, nDestVipLevel=%d}",nKickRoleID,nSrcRoleRank,pPlayer->GetVipLevel());
 				nKickResult = enmKickResult_NO_Permission_King;
@@ -264,13 +260,13 @@ int32_t CKickUserEvent::KickUser(CRoom *pRoom,RoleRank nSrcRoleRank,VipLevel nSr
 	//被踢的人没有管理权限（权限和vip上都踢不了的时候返回）
 	else
 	{
-		if(nDestVipLevel >= enmVipLevel_Silver_KING)
+		if(nDestVipLevel >= enmVipLevel_Baron)
 		{
 			if(nDestVipLevel >= nSrcVipLevel)
 			{
 				//todo 判断VIP 皇冠等级（银、金冠、水晶只有室主可踢，其他冠不可以踢）
-				if((pPlayer->GetVipLevel() >= enmVipLevel_DIAMOND && nSrcRoleRank<enmRoleRank_Super)
-						|| (pPlayer->GetVipLevel() <= enmVipLevel_SUPER&&pPlayer->GetVipLevel() >= enmVipLevel_Silver_KING && nSrcRoleRank < enmRoleRank_Host))
+				if((pPlayer->GetVipLevel() >= enmVipLevel_Marquis && nSrcRoleRank<enmRoleRank_Super)
+						|| (pPlayer->GetVipLevel() <= enmVipLevel_Earl&&pPlayer->GetVipLevel() >= enmVipLevel_Baron && nSrcRoleRank < enmRoleRank_Host))
 				{
 					WRITE_ERROR_LOG("kick player filed because no permissions{nKickRoleID=%d, nSrcRoleRank=%d, nDestVipLevel=%d}",nKickRoleID,nSrcRoleRank,pPlayer->GetVipLevel());
 					nKickResult = enmKickResult_NO_Permission_King;

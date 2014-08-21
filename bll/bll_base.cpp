@@ -954,9 +954,9 @@ int32_t CBllBase::ExitRoom(CPlayer *pPlayer,PlayerIndex nPlayerIndex,CRoom *pRoo
 			WRITE_WARNING_LOG("exit room has error because  deletePlayer player error !{nRoleID=%d, nRoomID=%d, ret=0x%08x}\n",nRoleID,nRoomID,ret);
 		}
 		int32_t nNeedRobotCount = pRoom->GetNeedRobotCount();
-		if(nNeedRobotCount < 0 && isNeedKickRobot)
+		if(isNeedKickRobot)
 		{
-			KickRobot(pRoom,-nNeedRobotCount);
+			KickRobot(pRoom, nNeedRobotCount);
 		}
 
 		//pRoom->UpdateUserCountOnMedia(pPlayer->GetConnInfo().nServerID, -1);

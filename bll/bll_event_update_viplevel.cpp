@@ -46,7 +46,7 @@ int32_t CUpdateVipLevelMessageEvent::OnMessageEvent(MessageHeadSS * pMsgHead, IM
 		return E_NULLPOINTER;
 	}
 
-	if(pUpdateVipLevelNotify->nVipLevel > enmVipLevel_TIP)
+	if(pUpdateVipLevelNotify->nVipLevel > enmVipLevel_King)
 	{
 		WRITE_ERROR_LOG("update vip level has error value{nRoleID=%d, nVipLevel=%d}\n",pUpdateVipLevelNotify->nRoleID,pUpdateVipLevelNotify->nVipLevel);
 		return S_OK;

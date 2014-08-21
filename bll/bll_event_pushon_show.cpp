@@ -131,7 +131,7 @@ int32_t CPushOnShowEvent::OnEventPushOnShow(MessageHeadSS *pMsgHead, IMsgBody* p
 		return E_RS_ISONMIC;
 	}
 	//判断是否需要同意的
-	if((pDestPlayer->GetVipLevel() >= enmVipLevel_SUPER || pDestPlayer->IsOfficialPlayer() || (pDestPlayer->GetIdentityType() & enmIdentityType_AGENT)) && (pPushOnShowReq->nDestID != pMsgHead->nRoleID))
+	if((pDestPlayer->GetVipLevel() >= enmVipLevel_Earl || pDestPlayer->IsOfficialPlayer() || (pDestPlayer->GetIdentityType() & enmIdentityType_AGENT)) && (pPushOnShowReq->nDestID != pMsgHead->nRoleID))
 	{
 		WRITE_NOTICE_LOG("push on show:player is need answer{nDestRoleID=%d}\n",pPushOnShowReq->nDestID);
 		SendResponseToUser(pMsgHead,enmPushResult_Need_Answer,nOptionLen,pOptionData);

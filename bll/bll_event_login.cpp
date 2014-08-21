@@ -1202,7 +1202,7 @@ int32_t CLoginMessageEvent::VerifyPlayer(CRoom *pRoom, CPlayer *pPlayer,
 		return S_OK;
 	}
 	//是不是管理员及以上级别，或者官方人员
-	bool isVip = pPlayer->GetVipLevel()>=enmVipLevel_RED;
+	bool isVip = pPlayer->GetVipLevel()>=enmVipLevel_Gold;
 	bool isAdmin = pRoom->GetRoleRank(pPlayer->GetRoleID())>= enmRoleRank_Admin;
 	//判断房间是否关闭
 	if(pRoom->IsRoomCloseed() && (!isOfficialPlayer) && (pRoom->GetRoleRank(pPlayer->GetRoleID()) < enmRoleRank_Host))
@@ -1543,15 +1543,15 @@ int32_t CLoginMessageEvent::DistributionRobot(CRoom *pRoom)
 	//判断是否需要加机器人
 	CStaPlayerCount stStaPlayerCount;
 	int32_t nNeedRobotCount = pRoom->GetNeedRobotCount();
-	if(nNeedRobotCount < 0)
-	{
-		ret = KickRobot(pRoom,-nNeedRobotCount);
-		if(ret<0)
-		{
-			WRITE_ERROR_LOG("kick reboot filed!\n");
-		}
-
-	}
+//	if(nNeedRobotCount < 0)
+//	{
+//		ret = KickRobot(pRoom,-nNeedRobotCount);
+//		if(ret<0)
+//		{
+//			WRITE_ERROR_LOG("kick reboot filed!\n");
+//		}
+//
+//	}
 	for(int32_t i = 0;i < nNeedRobotCount;i++)
 	{
 		int32_t nGetCount = 0;

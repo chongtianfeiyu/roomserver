@@ -1597,20 +1597,46 @@ public:
     //为正为加，为负为减
     int32_t GetNeedRobotCount()
     {
-    	if((int32_t)(m_sRoomPlayerIndexList.ObjectCount() - m_nHideEnterOfficer)<(int32_t)g_RebotConfig.GetBeginDistribution())
+//    	if((int32_t)(m_sRoomPlayerIndexList.ObjectCount() - m_nHideEnterOfficer)<(int32_t)g_RebotConfig.GetBeginDistribution())
+//    	{
+//    		return 0;
+//    	}
+//    	int32_t nCanEnterCount = (int32_t)(m_nMaxRealUserLimit-(m_sRoomPlayerIndexList.ObjectCount()+m_sRoomRebotIndexList.ObjectCount()-m_nHideEnterOfficer));
+//    	if(IsKickRobotForRoomFull())
+//    	{
+//           return nCanEnterCount;
+//    	}
+//    	int32_t nNeedCount = (int32_t)((m_sRoomPlayerIndexList.ObjectCount()-g_RebotConfig.GetBeginDistribution()-m_nHideEnterOfficer)*m_nRobotPercent/100)-m_sRoomRebotIndexList.ObjectCount();
+//    	if(nCanEnterCount<nNeedCount)
+//    	{
+//    		return nCanEnterCount;
+//    	}
+//    	return nNeedCount;
+    	int32_t nNeedCount = 0;
+    	//这个分支表明最后一个玩家退房了
+    	if(m_sRoomPlayerIndexList.ObjectCount() + m_nHideEnterOfficer <= 0)
     	{
-    		return 0;
+    		nNeedCount = m_sRoomRebotIndexList.ObjectCount();
+    		return nNeedCount;
     	}
-    	int32_t nCanEnterCount = (int32_t)(m_nMaxRealUserLimit-(m_sRoomPlayerIndexList.ObjectCount()+m_sRoomRebotIndexList.ObjectCount()-m_nHideEnterOfficer));
-    	if(IsKickRobotForRoomFull())
+
+    	if(m_sRoomPlayerIndexList.ObjectCount() < g_RebotConfig.GetBeginDistribution())
     	{
-           return nCanEnterCount;
+    		return nNeedCount;
     	}
-    	int32_t nNeedCount = (int32_t)((m_sRoomPlayerIndexList.ObjectCount()-g_RebotConfig.GetBeginDistribution()-m_nHideEnterOfficer)*m_nRobotPercent/100)-m_sRoomRebotIndexList.ObjectCount();
-    	if(nCanEnterCount<nNeedCount)
+
+    	int32_t nLeftCount = m_nMaxRealUserLimit - (m_sRoomPlayerIndexList.ObjectCount() + m_sRoomRebotIndexList.ObjectCount() + m_nHideEnterOfficer);
+    	if(nLeftCount < 0)
     	{
-    		return nCanEnterCount;
+    		return nNeedCount;
     	}
+
+    	nNeedCount = Random(m_nRobotPercent);
+    	if(nNeedCount > nLeftCount)
+    	{
+    		nNeedCount = nLeftCount;
+    	}
+
     	return nNeedCount;
     }
     RoleID GetKickRobotRoleID()
@@ -1660,7 +1686,7 @@ public:
 		VipLevel nTempVipLevel = enmVipLevel_NONE;
 		if(m_nRoomOption & enmRoomOptionType_Public_Chat_Vip)
 		{
-			nTempVipLevel = enmVipLevel_REGISTER;
+			nTempVipLevel = enmVipLevel_Regist;
 			nTextResult = enmTextResult_VipCanPublicChat;
 		}
 		else
